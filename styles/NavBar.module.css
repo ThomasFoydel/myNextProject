@@ -1,0 +1,18 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 6em;
+  background: black;
+  color: white;
+  padding: 0.4rem;
+}
+.logo {
+  font-size: 2rem;
+}
+.navbar a {
+  cursor: pointer;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
