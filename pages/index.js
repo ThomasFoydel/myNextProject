@@ -1,10 +1,7 @@
-import Head from 'next/head';
-
-import NavBar from '../components/NavBar';
 export default function Home() {
   return (
     <div>
-      <NavBar />
+      <h2>Blog</h2>
     </div>
   );
 }

@@ -14,3 +14,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background: black;
+  color: #eee;
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 0.8rem;
+}
