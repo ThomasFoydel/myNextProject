@@ -24,4 +24,17 @@ footer {
   text-align: center;
   font-size: 1.25rem;
   padding: 0.8rem;
+  height: 4em;
+}
+.fourohfour {
+  text-align: center;
+}
+
+.fourohfour h2 {
+  font-size: 3.5rem;
+}
+
+.fourohfour a {
+  font-weight: bold;
+  text-decoration: underline;
 }
