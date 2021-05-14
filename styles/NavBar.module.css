@@ -8,7 +8,8 @@
   padding: 0.4rem;
 }
 .logo {
-  font-size: 2rem;
+  width: 200px;
+  height: 100px;
 }
 .navbar a {
   cursor: pointer;
