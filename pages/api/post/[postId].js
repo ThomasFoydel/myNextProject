@@ -1,6 +1,14 @@
-function handler(req, res) {
-  const { postId } = req.query;
+import dbConnection from '../../../middlewares/db';
+import mongoose from 'mongoose';
 
-  res.send({ _id: postId, title: 'example title', content: 'example content' });
+async function handler(req, res) {
+  const { postId } = req.query;
+  var isValid = mongoose.Types.ObjectId.isValid(postId);
+  if (isValid) {
+    const foundPost = await mongoose.models.Post.findById(postId);
+    return res.send(foundPost);
+  } else {
+    return res.status(404).send();
+  }
 }
-export default handler;
+export default dbConnection(handler);
