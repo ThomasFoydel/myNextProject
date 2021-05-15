@@ -6,12 +6,22 @@ const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);
   useEffect(() => {
-    axios
-      .get(`/api/post/${router.query.postId}`)
-      .then(({ data }) => setPost(data))
-      .catch((err) => console.log(err));
-  }, []);
-  return <div>post {router.query.postId}</div>;
+    router.query.postId &&
+      axios
+        .get(`/api/post/${router.query.postId}`)
+        .then(({ data }) => setPost(data))
+        .catch((err) => console.log(err));
+  }, [router.query.postId]);
+  return <div>{post && <PostDisplay props={{ post }} key={post._id} />}</div>;
+};
+
+const PostDisplay = ({ props: { post } }) => {
+  return (
+    <div>
+      <p>{post.title}</p>
+      <p>{post.content}</p>
+    </div>
+  );
 };
 
 export default Post;
