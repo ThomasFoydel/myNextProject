@@ -12,8 +12,15 @@ const Auth = () => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { target } = e;
-    console.dir(target);
+    const { id } = e.target;
+    axios
+      .post(`/api/auth/${id}`, form[id])
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(({ response: { data } }) => {
+        console.log(data.error);
+      });
   };
   const closeAuth = () => {};
   return (

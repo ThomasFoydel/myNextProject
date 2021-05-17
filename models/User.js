@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
 });
 
@@ -32,4 +33,4 @@ userSchema.methods.validatePassword = async function validatePassword(data) {
 };
 
 const User = mongoose.model('User', userSchema);
-export default User;
+export default mongoose.models.User || User;

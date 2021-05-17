@@ -1,4 +1,4 @@
-import dbConnection from '../../middlewares/db';
+import dbConnection from '../../../middlewares/db';
 import mongoose from 'mongoose';
 
 const login = async (req, res) => {

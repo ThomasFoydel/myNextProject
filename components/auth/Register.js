@@ -7,7 +7,7 @@ const Register = ({
   return (
     <>
       <h3>Register</h3>
-      <form className={styles.authform} onSubmit={handleSubmit}>
+      <form id='register' className={styles.authform} onSubmit={handleSubmit}>
         <label htmlFor='name'>Name: </label>
         <input
           onChange={handleChange}
