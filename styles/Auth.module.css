@@ -1,0 +1,65 @@
+.auth {
+  background: rgb(16, 16, 16);
+  color: white;
+  text-align: center;
+  width: 60%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  padding: 2.5rem 1.2rem;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+.authform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 260px;
+}
+
+.authform input {
+  width: 80%;
+  font-size: 1.4rem;
+  padding: 0.25rem;
+  margin: 0.5rem;
+}
+
+.authform label {
+  position: absolute;
+  left: -99999px;
+  top: -99999px;
+}
+
+.authform button[type='submit'] {
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  background: white;
+  color: black;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.authform button[type='submit']:hover {
+  background: #ccc;
+  color: #222;
+}
+
+.toggle {
+  background: #eeeeee00;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  text-decoration: underline;
+}
