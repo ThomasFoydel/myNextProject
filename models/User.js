@@ -32,5 +32,4 @@ userSchema.methods.validatePassword = async function validatePassword(data) {
   return bcrypt.compare(data, this.password);
 };
 
-const User = mongoose.model('User', userSchema);
-export default mongoose.models.User || User;
+export default mongoose.models.User || mongoose.model('User', userSchema);

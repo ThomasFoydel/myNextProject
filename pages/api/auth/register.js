@@ -1,12 +1,6 @@
 import dbConnection from '../../../middlewares/db';
-import mongoose from 'mongoose';
+import User from '../../../models/User';
 
-let User;
-try {
-  User = mongoose.model('User');
-} catch (err) {
-  User = require('../../../models/User');
-}
 const register = async (req, res) => {
   const respond = (s, d) => {
     res.status(s).send(d);
