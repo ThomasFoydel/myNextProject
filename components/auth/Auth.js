@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import styles from '../../styles/Auth.module.css';
 import Register from './Register';
