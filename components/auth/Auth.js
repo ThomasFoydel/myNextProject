@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from '../../styles/Auth.module.css';
 import Register from './Register';
 import Login from './Login';
+import { signIn } from 'next-auth/client';
 
 const Auth = () => {
   const [show, setShow] = useState('register');
@@ -10,17 +11,26 @@ const Auth = () => {
     register: { name: '', email: '', password: '', confirmPassword: '' },
     login: { email: '', password: '' },
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { id } = e.target;
-    axios
-      .post(`/api/auth/${id}`, form[id])
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch(({ response: { data } }) => {
-        console.log(data.error);
+    if (id === 'register') {
+      axios
+        .post('/api/auth/register', form[id])
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch(({ response: { data } }) => {
+          console.log(data.error);
+        });
+    } else if (id === 'login') {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: form.login.email,
+        password: form.login.password,
       });
+      console.log(result);
+    }
   };
   const closeAuth = () => {};
   return (
