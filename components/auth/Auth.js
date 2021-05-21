@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import styles from '../../styles/Auth.module.css';
 import Register from './Register';
 import Login from './Login';
 import { signIn } from 'next-auth/client';
+import authContext from '../../store/authContext';
 
 const Auth = () => {
+  const authCtx = useContext(authContext);
+
   const [show, setShow] = useState('register');
   const [form, setForm] = useState({
     register: { name: '', email: '', password: '', confirmPassword: '' },
@@ -29,12 +32,17 @@ const Auth = () => {
         email: form.login.email,
         password: form.login.password,
       });
-      console.log(result);
+      if (result && !result.error) closeAuth();
     }
   };
-  const closeAuth = () => {};
+  const closeAuth = () => {
+    authCtx.setAuthOpen(false);
+  };
   return (
-    <div className={styles.auth}>
+    <div
+      className={styles.auth}
+      style={{ display: authCtx.authOpen ? 'inherit' : 'none' }}
+    >
       <button className={styles.close} onClick={closeAuth}>
         X
       </button>

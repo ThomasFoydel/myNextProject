@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
       <title>My Next Project</title>
       <NavBar />
       {children}
-      {true && <Auth />}
+      <Auth />
       <Footer />
     </>
   );

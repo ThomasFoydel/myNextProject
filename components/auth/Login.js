@@ -14,7 +14,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
           placeholder='Email'
           id='email'
           required
-        ></input>
+        />
         <label htmlFor='name'>Password: </label>
         <input
           onChange={handleChange}
@@ -23,7 +23,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
           placeholder='Password'
           id='password'
           required
-        ></input>
+        />
         <button type='submit'>Sign in</button>
       </form>
       <button className={styles.toggle} onClick={() => setShow('register')}>

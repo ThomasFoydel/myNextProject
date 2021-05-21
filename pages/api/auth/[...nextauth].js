@@ -13,7 +13,7 @@ const nextAuth = NextAuth({
       async authorize(credentials) {
         const foundUser = await User.findOne({
           email: credentials.email,
-        }).select('password');
+        }).select('+password');
         if (!foundUser) throw new Error('no user');
 
         const match = await bcrypt.compare(
