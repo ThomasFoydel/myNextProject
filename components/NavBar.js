@@ -28,8 +28,16 @@ const NavBar = () => {
         <a>Contact</a>
       </Link>
 
-      {loggedOut && <button onClick={handleOpenAuth}>login</button>}
-      {loggedIn && <button onClick={signOut}>logout</button>}
+      {loggedOut && (
+        <button className={styles.btn} onClick={handleOpenAuth}>
+          login
+        </button>
+      )}
+      {loggedIn && (
+        <button className={styles.btn} onClick={signOut}>
+          logout
+        </button>
+      )}
     </nav>
   );
 };

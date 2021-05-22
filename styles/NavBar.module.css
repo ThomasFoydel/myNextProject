@@ -7,13 +7,29 @@
   color: white;
   padding: 0.4rem;
 }
+
 .logo {
   width: 200px;
   height: 100px;
 }
+
 .navbar a {
   cursor: pointer;
 }
+
 .navbar a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  font-size: 1rem;
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn:hover {
   text-decoration: underline;
 }
