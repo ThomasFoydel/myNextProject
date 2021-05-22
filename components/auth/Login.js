@@ -6,7 +6,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
     <>
       <h3>Login</h3>
       <form id='login' className={styles.authform} onSubmit={handleSubmit}>
-        <label htmlFor='name'>Email: </label>
+        <label htmlFor='email'>Email: </label>
         <input
           onChange={handleChange}
           value={email}
@@ -15,7 +15,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
           id='email'
           required
         />
-        <label htmlFor='name'>Password: </label>
+        <label htmlFor='password'>Password: </label>
         <input
           onChange={handleChange}
           value={password}

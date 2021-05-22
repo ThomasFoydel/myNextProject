@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSession } from 'next-auth/client';
 import axios from 'axios';
+import styles from '../styles/NewPost.module.css';
 
 const NewPost = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,15 +27,21 @@ const NewPost = () => {
   if (isLoading) return <p>loading!</p>;
 
   return (
-    <div>
+    <div className={styles.newPost}>
       <h2>new post</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor='title'>Title</label>
         <input
+          id='title'
+          placeholder='title'
           value={title}
           type='text'
           onChange={({ target: { value } }) => setTitle(value)}
         />
+        <label htmlFor='content'>Content</label>
         <textarea
+          id='content'
+          placeholder='content'
           value={content}
           style={{ resize: 'none' }}
           onChange={({ target: { value } }) => setContent(value)}

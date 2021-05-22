@@ -17,7 +17,7 @@ const Register = ({
           id='name'
           required
         ></input>
-        <label htmlFor='name'>Email: </label>
+        <label htmlFor='email'>Email: </label>
         <input
           onChange={handleChange}
           value={email}
@@ -26,7 +26,7 @@ const Register = ({
           id='email'
           required
         ></input>
-        <label htmlFor='name'>Password: </label>
+        <label htmlFor='password'>Password: </label>
         <input
           onChange={handleChange}
           value={password}
