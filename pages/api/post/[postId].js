@@ -1,5 +1,6 @@
 import dbConnection from '../../../middlewares/db';
 import mongoose from 'mongoose';
+import Post from '../../../models/Post';
 
 async function handler(req, res) {
   const { postId } = req.query;
@@ -7,7 +8,7 @@ async function handler(req, res) {
   if (method === 'GET') {
     var isValid = mongoose.Types.ObjectId.isValid(postId);
     if (isValid) {
-      const foundPost = await mongoose.models.Post.findById(postId);
+      const foundPost = await Post.findById(postId);
       return res.send(foundPost);
     } else {
       return res.status(404).send();
