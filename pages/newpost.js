@@ -18,9 +18,7 @@ const NewPost = () => {
   useEffect(() => {
     getSession().then((session) => {
       setIsLoading(false);
-      if (!session) {
-        window.location.href = '/';
-      }
+      if (!session) window.location.href = '/';
     });
   }, []);
 

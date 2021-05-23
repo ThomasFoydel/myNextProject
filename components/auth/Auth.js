@@ -22,6 +22,7 @@ const Auth = () => {
         .post('/api/auth/register', form[id])
         .then(({ data }) => {
           console.log(data);
+          closeAuth();
         })
         .catch(({ response: { data } }) => {
           console.log(data.error);
