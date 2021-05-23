@@ -10,10 +10,14 @@
   transform: translateX(-50%);
   border-radius: 4px;
   position: relative;
+}
+
+.newPost,
+.newPost form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: space-around;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .newPost input,

@@ -1,6 +1,5 @@
 .blog {
   text-align: center;
-  background: #ddd;
   color: #222;
   padding: 1rem;
   padding-bottom: 5rem;
@@ -22,6 +21,7 @@
 }
 
 .date {
+  color: #ccc;
   font-size: 1rem;
 }
 

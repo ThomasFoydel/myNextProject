@@ -1,9 +1,12 @@
 const Footer = () => {
   return (
-    <footer className='footer'>
-      © No Copyright My Next Project 2021
-      <hr />
-    </footer>
+    <>
+      <div className='footerspace' />
+      <footer className='footer'>
+        © No Copyright My Next Project 2021
+        <hr />
+      </footer>
+    </>
   );
 };
 
