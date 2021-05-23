@@ -50,14 +50,15 @@ export async function getStaticProps() {
 
         return {
           props: { posts: stringIdPosts },
+          revalidate: 21600,
         };
       } catch (err) {
         console.log(err);
-        return { props: { posts: [] } };
+        return { props: { posts: [] }, revalidate: 21600 };
       }
     })
     .catch((err) => {
       console.log(err);
-      return { props: { posts: [] } };
+      return { props: { posts: [] }, revalidate: 21600 };
     });
 }
