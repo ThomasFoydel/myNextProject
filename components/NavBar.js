@@ -9,36 +9,37 @@ const NavBar = () => {
   const [session, loading] = useSession();
   const loggedIn = !loading && session;
   const loggedOut = !loading && !session;
-  const handleOpenAuth = () => {
-    authCtx.setAuthOpen(true);
-  };
+  const handleOpenAuth = () => authCtx.setAuthOpen(true);
   return (
-    <nav className={styles.navbar}>
-      <img className={styles.logo} src='/logo.png' alt='logo' />
+    <>
+      <nav className={styles.navbar}>
+        <img className={styles.logo} src='/logo.png' alt='logo' />
 
-      <Link href='/'>
-        <a>Blog</a>
-      </Link>
+        <Link href='/'>
+          <a>Blog</a>
+        </Link>
 
-      <Link href='/about'>
-        <a>About</a>
-      </Link>
+        <Link href='/about'>
+          <a>About</a>
+        </Link>
 
-      <Link href='/contact'>
-        <a>Contact</a>
-      </Link>
+        <Link href='/contact'>
+          <a>Contact</a>
+        </Link>
 
-      {loggedOut && (
-        <button className={styles.btn} onClick={handleOpenAuth}>
-          login
-        </button>
-      )}
-      {loggedIn && (
-        <button className={styles.btn} onClick={signOut}>
-          logout
-        </button>
-      )}
-    </nav>
+        {loggedOut && (
+          <button className={styles.btn} onClick={handleOpenAuth}>
+            login
+          </button>
+        )}
+        {loggedIn && (
+          <button className={styles.btn} onClick={signOut}>
+            logout
+          </button>
+        )}
+      </nav>
+      <div className={styles.navSpace} />
+    </>
   );
 };
 

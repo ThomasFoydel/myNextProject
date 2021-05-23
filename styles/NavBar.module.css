@@ -6,6 +6,12 @@
   background: black;
   color: white;
   padding: 0.4rem;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+}
+.navSpace {
+  height: 6em;
 }
 
 .logo {
