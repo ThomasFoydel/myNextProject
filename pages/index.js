@@ -2,10 +2,26 @@ import Post from '../models/Post';
 import User from '../models/User';
 import mongoose from 'mongoose';
 
-export default function Home() {
+import styles from '../styles/Blog.module.css';
+
+const BlogPost = ({ props: { post } }) => (
+  <div className={styles.blogpost}>
+    <h3>{post.title}</h3>
+    <p>
+      <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
+      <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+    </p>
+    <p>{post.content}</p>
+  </div>
+);
+
+export default function Home({ posts }) {
   return (
-    <div>
+    <div className={styles.blog}>
       <h2>Blog</h2>
+      {posts.map((post) => (
+        <BlogPost props={{ post }} key={post.id} />
+      ))}
     </div>
   );
 }
@@ -18,11 +34,22 @@ export async function getStaticProps() {
         const thomas = await User.findOne({ email: 'thomasjfoydel@gmail.com' });
 
         const posts = await Post.find({ author: thomas._id })
+          .lean()
           .sort({ createdAt: 'desc' })
           .limit(50);
 
+        const stringIdPosts = posts.map(
+          ({ _id, author, createdAt, updatedAt, ...post }) => ({
+            ...post,
+            id: _id.toString(),
+            author: author.toString(),
+            createdAt: createdAt.toString(),
+            updatedAt: updatedAt.toString(),
+          })
+        );
+
         return {
-          props: { posts },
+          props: { posts: stringIdPosts },
         };
       } catch (err) {
         console.log(err);
