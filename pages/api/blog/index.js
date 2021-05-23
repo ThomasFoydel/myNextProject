@@ -16,7 +16,7 @@ const blogHandler = async (req, res) => {
   const thomas = mongoose.Types.ObjectId('60aa867eab977cd9f675d9e6');
   const posts = await Post.find({ author: thomas })
     .sort({ createdAt: 'desc' })
-    .limit(100)
+    .limit(50)
     .skip(req.body.skip || 0);
   return res.send(posts);
 };
