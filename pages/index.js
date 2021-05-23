@@ -7,11 +7,11 @@ import styles from '../styles/Blog.module.css';
 const BlogPost = ({ props: { post } }) => (
   <div className={styles.blogpost}>
     <h3>{post.title}</h3>
-    <p>
+    <p className={styles.date}>
       <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
       <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
     </p>
-    <p>{post.content}</p>
+    <p className={styles.content}>{post.content}</p>
   </div>
 );
 

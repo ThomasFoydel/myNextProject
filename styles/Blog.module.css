@@ -1,5 +1,33 @@
 .blog {
+  text-align: center;
+  background: #ddd;
+  color: #222;
+  padding: 1rem;
+  padding-bottom: 5rem;
+}
+.blog h2 {
+  font-size: 4rem;
 }
 
 .blogpost {
+  background: #222;
+  color: white;
+  padding: 1rem;
+  margin: 1em;
+  border-radius: 4px;
+}
+
+.blogpost h3 {
+  font-size: 2rem;
+}
+
+.date {
+  font-size: 1rem;
+}
+
+.content {
+  font-size: 1.4rem;
+  max-height: 400px;
+  overflow: auto;
+  padding: 0.5rem;
 }
