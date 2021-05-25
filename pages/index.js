@@ -17,13 +17,20 @@ const BlogPost = ({ props: { post } }) => (
 );
 
 export default function Home({ posts }) {
+  const [blogPosts, setBlogPosts] = useState(posts);
   const [offset, setOffset] = useState(0);
+  const [showNextBtn, setShowNextBtn] = useState(true);
   const fetchPosts = (inc) => {
     setOffset((o) => o + inc);
     axios
       .get('/api/blog', { skip: offset + inc })
       .then(({ data }) => {
-        console.log(data);
+        if (inc === -1) setShowNextBtn(true);
+        if (inc === 1 && data[0]._id === blogPosts[0]._id) {
+          setShowNextBtn(false);
+        } else {
+          setBlogPosts(data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -33,11 +40,21 @@ export default function Home({ posts }) {
   return (
     <div className={styles.blog}>
       <h2>Blog</h2>
-      {posts.map((post) => (
-        <BlogPost props={{ post }} key={post.id} />
-      ))}
-      <button onClick={() => fetchPosts(-1)}>prev</button>
-      <button onClick={() => fetchPosts(1)}>next</button>
+      {blogPosts.map((post) => {
+        return <BlogPost props={{ post }} key={post._id} />;
+      })}
+      <button
+        className={`${offset <= 0 && styles.btnInactive}`}
+        onClick={() => offset > 0 && fetchPosts(-1)}
+      >
+        prev
+      </button>
+      <button
+        className={`${!showNextBtn && styles.btnInactive}`}
+        onClick={() => showNextBtn && fetchPosts(1)}
+      >
+        next
+      </button>
     </div>
   );
 }
@@ -57,7 +74,7 @@ export async function getStaticProps() {
         const stringIdPosts = posts.map(
           ({ _id, author, createdAt, updatedAt, ...post }) => ({
             ...post,
-            id: _id.toString(),
+            _id: _id.toString(),
             author: author.toString(),
             createdAt: createdAt.toString(),
             updatedAt: updatedAt.toString(),
