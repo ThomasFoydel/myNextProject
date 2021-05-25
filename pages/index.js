@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import Post from '../models/Post';
 import User from '../models/User';
 import mongoose from 'mongoose';
-
+import axios from 'axios';
 import styles from '../styles/Blog.module.css';
 
 const BlogPost = ({ props: { post } }) => (
@@ -16,12 +17,27 @@ const BlogPost = ({ props: { post } }) => (
 );
 
 export default function Home({ posts }) {
+  const [offset, setOffset] = useState(0);
+  const fetchPosts = (inc) => {
+    setOffset((o) => o + inc);
+    axios
+      .get('/api/blog', { skip: offset + inc })
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className={styles.blog}>
       <h2>Blog</h2>
       {posts.map((post) => (
         <BlogPost props={{ post }} key={post.id} />
       ))}
+      <button onClick={() => fetchPosts(-1)}>prev</button>
+      <button onClick={() => fetchPosts(1)}>next</button>
     </div>
   );
 }
@@ -36,7 +52,7 @@ export async function getStaticProps() {
         const posts = await Post.find({ author: thomas._id })
           .lean()
           .sort({ createdAt: 'desc' })
-          .limit(50);
+          .limit(15);
 
         const stringIdPosts = posts.map(
           ({ _id, author, createdAt, updatedAt, ...post }) => ({
