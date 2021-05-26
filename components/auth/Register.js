@@ -16,6 +16,7 @@ const Register = ({
           placeholder='Name'
           id='name'
           required
+          autoComplete='name'
         ></input>
         <label htmlFor='email'>Email: </label>
         <input
@@ -25,6 +26,7 @@ const Register = ({
           placeholder='Email'
           id='email'
           required
+          autoComplete='email'
         ></input>
         <label htmlFor='password'>Password: </label>
         <input
@@ -34,6 +36,7 @@ const Register = ({
           placeholder='Password'
           id='password'
           required
+          autoComplete='current-password'
         ></input>
         <label htmlFor='confirmPassword'>Confirm Password: </label>
         <input
@@ -43,6 +46,7 @@ const Register = ({
           placeholder='Confirm password'
           id='confirmPassword'
           required
+          autoComplete='current-password'
         ></input>
         <button type='submit'>Submit</button>
       </form>

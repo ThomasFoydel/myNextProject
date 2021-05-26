@@ -14,6 +14,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
           placeholder='Email'
           id='email'
           required
+          autoComplete='email'
         />
         <label htmlFor='password'>Password: </label>
         <input
@@ -23,6 +24,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
           placeholder='Password'
           id='password'
           required
+          autoComplete='current-password'
         />
         <button type='submit'>Sign in</button>
       </form>
