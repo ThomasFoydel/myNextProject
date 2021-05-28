@@ -19,22 +19,23 @@ const NavBar = () => {
           <a>Blog</a>
         </Link>
 
-        <Link href='/about'>
-          <a>About</a>
-        </Link>
-
         <Link href='/contact'>
           <a>Contact</a>
         </Link>
 
+        {loggedIn && (
+          <>
+            <Link href='/profile'>
+              <a>Profile</a>
+            </Link>
+            <button className={styles.btn} onClick={signOut}>
+              logout
+            </button>
+          </>
+        )}
         {loggedOut && (
           <button className={styles.btn} onClick={handleOpenAuth}>
             login
-          </button>
-        )}
-        {loggedIn && (
-          <button className={styles.btn} onClick={signOut}>
-            logout
           </button>
         )}
       </nav>
