@@ -8,12 +8,12 @@ import authContext from '../../store/authContext';
 
 const Auth = () => {
   const authCtx = useContext(authContext);
-
   const [show, setShow] = useState('register');
   const [form, setForm] = useState({
     register: { name: '', email: '', password: '', confirmPassword: '' },
     login: { email: '', password: '' },
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { id } = e.target;
@@ -36,9 +36,11 @@ const Auth = () => {
       if (result && !result.error) closeAuth();
     }
   };
+
   const closeAuth = () => {
     authCtx.setAuthOpen(false);
   };
+
   return (
     <div
       className={styles.auth}
