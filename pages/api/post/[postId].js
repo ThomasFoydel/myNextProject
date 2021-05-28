@@ -6,7 +6,7 @@ async function handler(req, res) {
   const { postId } = req.query;
   const { method } = req;
   if (method === 'GET') {
-    var isValid = mongoose.Types.ObjectId.isValid(postId);
+    const isValid = mongoose.Types.ObjectId.isValid(postId);
     if (isValid) {
       const foundPost = await Post.findById(postId);
       return res.send(foundPost);

@@ -25,7 +25,7 @@ const NavBar = () => {
 
         {loggedIn && (
           <>
-            <Link href='/profile'>
+            <Link href={`/profile/${session.sub}`}>
               <a>Profile</a>
             </Link>
             <button className={styles.btn} onClick={signOut}>

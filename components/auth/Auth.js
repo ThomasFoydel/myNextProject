@@ -21,7 +21,7 @@ const Auth = () => {
       axios
         .post('/api/auth/register', form[id])
         .then(({ data }) => {
-          console.log(data);
+          console.log('data: ', data);
           closeAuth();
         })
         .catch(({ response: { data } }) => {
@@ -33,6 +33,7 @@ const Auth = () => {
         email: form.login.email,
         password: form.login.password,
       });
+      console.log('RESULT: ', result);
       if (result && !result.error) closeAuth();
     }
   };

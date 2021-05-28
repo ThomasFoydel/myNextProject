@@ -23,10 +23,18 @@ const nextAuth = NextAuth({
 
         if (!match) throw new Error('passwords do not match!');
 
-        return { email: foundUser.email };
+        const userInfo = {
+          email: foundUser.email,
+          id: foundUser._id.toString(),
+        };
+
+        return userInfo;
       },
     }),
   ],
+  callbacks: {
+    session: async (user, session) => Promise.resolve(session),
+  },
 });
 
 export default dbConnection(nextAuth);
