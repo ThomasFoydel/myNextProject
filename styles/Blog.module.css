@@ -32,6 +32,14 @@
   padding: 0.5rem;
 }
 
+.btn {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin: 0.5rem;
+  font-size: 1.1rem;
+}
+
 .btnInactive {
   opacity: 0.5;
+  cursor: default;
 }

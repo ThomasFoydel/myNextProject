@@ -44,13 +44,13 @@ export default function Home({ posts }) {
         return <BlogPost props={{ post }} key={post._id} />;
       })}
       <button
-        className={`${offset <= 0 && styles.btnInactive}`}
+        className={`${styles.btn} ${offset <= 0 && styles.btnInactive}`}
         onClick={() => offset > 0 && fetchPosts(-1)}
       >
         prev
       </button>
       <button
-        className={`${!showNextBtn && styles.btnInactive}`}
+        className={`${styles.btn} ${!showNextBtn && styles.btnInactive}`}
         onClick={() => showNextBtn && fetchPosts(1)}
       >
         next
