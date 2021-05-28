@@ -33,7 +33,6 @@ const Auth = () => {
         email: form.login.email,
         password: form.login.password,
       });
-      console.log('RESULT: ', result);
       if (result && !result.error) closeAuth();
     }
   };

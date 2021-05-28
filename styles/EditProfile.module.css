@@ -1,0 +1,27 @@
+.editProfile form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  min-width: 280px;
+  margin-left: 50%;
+  transform: translate(-50%);
+  background: #222;
+  color: white;
+  margin-top: 2em;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.editProfile input[type='text'] {
+  padding: 0.25rem;
+  margin: 0.5em;
+  font-size: 1.2rem;
+}
+
+.editProfile button {
+  margin-top: 0.5em;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+}

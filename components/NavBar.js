@@ -9,7 +9,9 @@ const NavBar = () => {
   const [session, loading] = useSession();
   const loggedIn = !loading && session;
   const loggedOut = !loading && !session;
+
   const handleOpenAuth = () => authCtx.setAuthOpen(true);
+
   return (
     <>
       <nav className={styles.navbar}>
