@@ -1,28 +1,49 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSession, getSession } from 'next-auth/client';
+import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import styles from '../../styles/Profile.module.css';
+import Link from 'next/link';
+
+const BlogPost = ({ props: { post } }) => (
+  <div className={styles.blogpost}>
+    <h3>{post.title}</h3>
+    <p className={styles.date}>
+      <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
+      <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+    </p>
+    <p className={styles.content}>{post.content}</p>
+  </div>
+);
 
 export default function Profile() {
-  const [myPosts, setMyPosts] = useState([]);
-  const [session, loading] = useSession();
+  const [posts, setPosts] = useState([]);
+  const [session] = useSession();
+  const [user, setUser] = useState({});
+  const [ownProfile, setOwnProfile] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     if (router.query.id) {
       axios
         .get(`/api/profile/${router.query.id}`)
-        .then((res) => {
-          console.log(res);
+        .then(({ data: { user, posts } }) => {
+          setUser(user);
+          setPosts(posts);
         })
-        .then((err) => console.log(err))
         .catch((err) => console.log(err));
     }
-  }, [router.query.id]);
+
+    if (session && router.query.id === session.sub) {
+      setOwnProfile(true);
+    }
+  }, [router.query.id, session]);
+
   return (
-    <div>
-      <h2>Profile</h2>
-      {myPosts.map((post) => (
+    <div className={styles.profile}>
+      <h2>{user.name}</h2>
+      {ownProfile && <Link href='/editprofile'>edit profile</Link>}
+      {posts.map((post) => (
         <BlogPost props={{ post }} key={post._id} />
       ))}
     </div>

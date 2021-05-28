@@ -1,0 +1,44 @@
+.profile {
+  text-align: center;
+  color: #222;
+  padding: 1rem;
+  padding-bottom: 5rem;
+}
+.blog h2 {
+  font-size: 4rem;
+}
+
+.blogpost {
+  background: #222;
+  color: white;
+  padding: 1rem;
+  margin: 1em;
+  border-radius: 4px;
+}
+
+.blogpost h3 {
+  font-size: 2rem;
+}
+.date {
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.content {
+  font-size: 1.4rem;
+  max-height: 400px;
+  overflow: auto;
+  padding: 0.5rem;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.btnInactive {
+  opacity: 0.5;
+  cursor: default;
+}
