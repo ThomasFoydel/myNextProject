@@ -21,10 +21,6 @@ const NavBar = () => {
           <a>Blog</a>
         </Link>
 
-        <Link href='/contact'>
-          <a>Contact</a>
-        </Link>
-
         {loggedIn && (
           <>
             <Link href={`/profile/${session.sub}`}>
