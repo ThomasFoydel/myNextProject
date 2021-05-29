@@ -18,6 +18,7 @@
 .logo {
   width: 200px;
   height: 100px;
+  cursor: pointer;
 }
 
 .navbar a {

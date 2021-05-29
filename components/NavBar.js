@@ -15,10 +15,8 @@ const NavBar = () => {
   return (
     <>
       <nav className={styles.navbar}>
-        <img className={styles.logo} src='/logo.png' alt='logo' />
-
         <Link href='/'>
-          <a>Blog</a>
+          <img className={styles.logo} src='/logo.png' alt='logo' />
         </Link>
 
         {loggedIn && (

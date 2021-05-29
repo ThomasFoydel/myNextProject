@@ -8,7 +8,7 @@ import authContext from '../../store/authContext';
 
 const Auth = () => {
   const authCtx = useContext(authContext);
-  const [show, setShow] = useState('register');
+  const [show, setShow] = useState('login');
   const [form, setForm] = useState({
     register: { name: '', email: '', password: '', confirmPassword: '' },
     login: { email: '', password: '' },
