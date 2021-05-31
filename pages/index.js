@@ -4,10 +4,13 @@ import User from '../models/User';
 import mongoose from 'mongoose';
 import axios from 'axios';
 import styles from '../styles/Blog.module.css';
+import Link from 'next/link';
 
 const BlogPost = ({ props: { post } }) => (
   <div className={styles.blogpost}>
-    <h3>{post.title}</h3>
+    <Link href={`/post/${post._id}`}>
+      <h3>{post.title}</h3>
+    </Link>
     <p className={styles.date}>
       <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
       <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
