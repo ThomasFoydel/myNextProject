@@ -7,15 +7,15 @@ import styles from '../styles/Blog.module.css';
 import Link from 'next/link';
 
 const BlogPost = ({ props: { post } }) => (
-  <div className={styles.blogpost}>
+  <div className='blogpost'>
     <Link href={`/post/${post._id}`}>
       <h3>{post.title}</h3>
     </Link>
-    <p className={styles.date}>
+    <p className='date'>
       <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
       <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
     </p>
-    <p className={styles.content}>{post.content}</p>
+    <p className='content'>{post.content}</p>
   </div>
 );
 

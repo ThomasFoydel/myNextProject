@@ -17,9 +17,13 @@ const Post = () => {
 
 const PostDisplay = ({ props: { post } }) => {
   return (
-    <div>
-      <p>{post.title}</p>
-      <p>{post.content}</p>
+    <div className='blogpost'>
+      <h3>{post.title}</h3>
+      <p className='date'>
+        <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
+        <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+      </p>
+      <p className='content'>{post.content}</p>
     </div>
   );
 };

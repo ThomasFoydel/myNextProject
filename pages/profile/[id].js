@@ -6,13 +6,13 @@ import styles from '../../styles/Profile.module.css';
 import Link from 'next/link';
 
 const BlogPost = ({ props: { post } }) => (
-  <div className={styles.blogpost}>
+  <div className='blogpost'>
     <h3>{post.title}</h3>
-    <p className={styles.date}>
+    <p className='date'>
       <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
       <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
     </p>
-    <p className={styles.content}>{post.content}</p>
+    <p className='content'>{post.content}</p>
   </div>
 );
 
