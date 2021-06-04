@@ -13,6 +13,7 @@ const blogHandler = async (req, res) => {
     .sort({ createdAt: 'desc' })
     .limit(15)
     .skip(req.body.skip * 15 || 0);
+
   return res.send(posts);
 };
 

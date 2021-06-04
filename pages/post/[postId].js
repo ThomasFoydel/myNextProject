@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../styles/Post.module.css';
-
 const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);

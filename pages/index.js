@@ -70,6 +70,7 @@ export async function getStaticProps() {
         const thomas = await User.findOne({ email: 'thomasjfoydel@gmail.com' });
 
         const posts = await Post.find({ author: thomas._id })
+          .select('-comments')
           .lean()
           .sort({ createdAt: 'desc' })
           .limit(15);

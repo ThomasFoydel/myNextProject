@@ -8,7 +8,7 @@ async function handler(req, res) {
   if (method === 'POST') {
     const session = await getSession({ req });
     if (!session) return res.status(401).send();
-    const foundUser = await User.findOne({ email: session.user.email });
+    const foundUser = await User.findById(session.sub);
     if (!foundUser) return res.status(422).send();
 
     const { _id } = foundUser;
