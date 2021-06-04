@@ -14,7 +14,7 @@ const Post = () => {
   }, [router.query.postId]);
   const submitComment = (comment) => {
     axios
-      .post(`/api/comment?postid=${post._id}`, comment)
+      .post(`/api/comment/q?postId=${post._id}`, comment)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
