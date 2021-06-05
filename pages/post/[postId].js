@@ -34,10 +34,10 @@ const PostDisplay = ({ props: { post, submitComment } }) => {
         <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
       </time>
       <p className='content'>{post.content}</p>
-      <CommentForm props={{ submitComment }} />
       {post.comments.map((comment) => (
         <Comment props={{ comment }} key={comment._id} />
       ))}
+      <CommentForm props={{ submitComment }} />
     </div>
   );
 };
@@ -51,8 +51,8 @@ const CommentForm = ({ props: { submitComment } }) => {
     setContent('');
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form className={styles.commentForm} onSubmit={handleSubmit}>
+      <textarea
         value={content}
         onChange={({ target }) => setContent(target.value)}
       />

@@ -8,3 +8,21 @@
     rgba(255, 255, 255, 0.13)
   );
 }
+
+.commentForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.commentForm textarea,
+.commentForm button {
+  font-size: 1.2rem;
+  margin: 0.25rem;
+  padding: 0.25rem;
+}
+.commentForm textarea {
+  min-height: 6rem;
+  resize: none;
+  width: 50%;
+  min-width: 190px;
+}
