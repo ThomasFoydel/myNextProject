@@ -1,0 +1,10 @@
+.comment {
+  border-radius: 4px;
+  margin: 0.5em;
+  padding: 0.5rem;
+  background: linear-gradient(
+    to top left,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.13)
+  );
+}

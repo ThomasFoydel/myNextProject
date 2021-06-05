@@ -15,7 +15,7 @@ const Post = () => {
   const submitComment = (comment) => {
     axios
       .post(`/api/comment/q?postId=${post._id}`, comment)
-      .then((res) => console.log(res))
+      .then(({ data }) => setPost(data))
       .catch((err) => console.log(err));
   };
   return (
@@ -26,15 +26,20 @@ const Post = () => {
 };
 
 const PostDisplay = ({ props: { post, submitComment } }) => {
+  console.log(post);
   return (
     <div className='blogpost'>
       <h3>{post.title}</h3>
+      <p>{post.author.name}</p>
       <p className='date'>
-        <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
-        <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+        <date>{new Date(post.createdAt).toLocaleDateString()}, </date>
+        <time>{new Date(post.createdAt).toLocaleTimeString()}</time>
       </p>
       <p className='content'>{post.content}</p>
       <CommentForm props={{ submitComment }} />
+      {post.comments.map((comment) => (
+        <Comment props={{ comment }} key={comment._id} />
+      ))}
     </div>
   );
 };
@@ -50,6 +55,18 @@ const CommentForm = ({ props: { submitComment } }) => {
       <input onChange={({ target }) => setContent(target.value)} />
       <button type='submit'>submit</button>
     </form>
+  );
+};
+const Comment = ({ props: { comment } }) => {
+  return (
+    <div className={styles.comment}>
+      <p>{comment.content}</p>
+      <p>{comment.author.name}</p>
+      <p className='date'>
+        <date>{new Date(comment.createdAt).toLocaleDateString()}, </date>
+        <time>{new Date(comment.createdAt).toLocaleTimeString()}</time>
+      </p>
+    </div>
   );
 };
 

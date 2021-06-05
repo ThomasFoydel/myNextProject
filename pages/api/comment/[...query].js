@@ -42,7 +42,17 @@ const commentHandler = async (req, res) => {
       foundPost._id,
       { $push: { comments: [newComment._id] } },
       { new: true }
-    );
+    ).populate([
+      {
+        path: 'comments',
+        model: 'Comment',
+        populate: {
+          path: 'author',
+          model: 'User',
+        },
+      },
+      { path: 'author' },
+    ]);
     return respond(200, updatedPost);
   } catch (err) {
     return respond(500, {
