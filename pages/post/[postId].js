@@ -6,35 +6,33 @@ const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);
   useEffect(() => {
+    let subscribed = true;
     router.query.postId &&
       axios
         .get(`/api/post/${router.query.postId}`)
-        .then(({ data }) => setPost(data))
+        .then(({ data }) => subscribed && setPost(data))
         .catch((err) => console.log(err));
+    return () => (subscribed = false);
   }, [router.query.postId]);
+
   const submitComment = (comment) => {
     axios
       .post(`/api/comment/q?postId=${post._id}`, comment)
       .then(({ data }) => setPost(data))
       .catch((err) => console.log(err));
   };
-  return (
-    <div>
-      {post && <PostDisplay props={{ post, submitComment }} key={post._id} />}
-    </div>
-  );
+  return post && <PostDisplay props={{ post, submitComment }} key={post._id} />;
 };
 
 const PostDisplay = ({ props: { post, submitComment } }) => {
-  console.log(post);
   return (
     <div className='blogpost'>
       <h3>{post.title}</h3>
       <p>{post.author.name}</p>
-      <p className='date'>
-        <date>{new Date(post.createdAt).toLocaleDateString()}, </date>
-        <time>{new Date(post.createdAt).toLocaleTimeString()}</time>
-      </p>
+      <time className='date'>
+        <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
+        <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+      </time>
       <p className='content'>{post.content}</p>
       <CommentForm props={{ submitComment }} />
       {post.comments.map((comment) => (
@@ -48,11 +46,16 @@ const CommentForm = ({ props: { submitComment } }) => {
   const [content, setContent] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!content || content.length < 15 || content.length > 500) return;
     submitComment({ content });
+    setContent('');
   };
   return (
     <form onSubmit={handleSubmit}>
-      <input onChange={({ target }) => setContent(target.value)} />
+      <input
+        value={content}
+        onChange={({ target }) => setContent(target.value)}
+      />
       <button type='submit'>submit</button>
     </form>
   );
@@ -62,10 +65,10 @@ const Comment = ({ props: { comment } }) => {
     <div className={styles.comment}>
       <p>{comment.content}</p>
       <p>{comment.author.name}</p>
-      <p className='date'>
-        <date>{new Date(comment.createdAt).toLocaleDateString()}, </date>
-        <time>{new Date(comment.createdAt).toLocaleTimeString()}</time>
-      </p>
+      <time className='date'>
+        <span>{new Date(comment.createdAt).toLocaleDateString()}, </span>
+        <span>{new Date(comment.createdAt).toLocaleTimeString()}</span>
+      </time>
     </div>
   );
 };
