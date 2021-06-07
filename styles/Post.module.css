@@ -1,6 +1,7 @@
 .comment {
   border-radius: 4px;
   margin: 0.5em;
+  position: relative;
   padding: 0.5rem;
   background: linear-gradient(
     to top left,
@@ -25,4 +26,19 @@
   resize: none;
   width: 50%;
   min-width: 190px;
+}
+
+.deleteBtn {
+  background: rgb(206, 51, 4);
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.25em 0.7em;
+}
+.deleteBtn:hover {
+  background: rgb(232, 64, 13);
 }

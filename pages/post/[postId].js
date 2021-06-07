@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../styles/Post.module.css';
+import { useSession } from 'next-auth/client';
 const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);
+
   useEffect(() => {
     let subscribed = true;
     router.query.postId &&
@@ -21,10 +23,23 @@ const Post = () => {
       .then(({ data }) => setPost(data))
       .catch((err) => console.log(err));
   };
-  return post && <PostDisplay props={{ post, submitComment }} key={post._id} />;
+  const deleteComment = (id) => {
+    axios
+      .delete(`/api/comment/${id}`)
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+  return (
+    post && (
+      <PostDisplay
+        props={{ post, submitComment, deleteComment }}
+        key={post._id}
+      />
+    )
+  );
 };
 
-const PostDisplay = ({ props: { post, submitComment } }) => {
+const PostDisplay = ({ props: { post, submitComment, deleteComment } }) => {
   return (
     <div className='blogpost'>
       <h3>{post.title}</h3>
@@ -35,7 +50,7 @@ const PostDisplay = ({ props: { post, submitComment } }) => {
       </time>
       <p className='content'>{post.content}</p>
       {post.comments.map((comment) => (
-        <Comment props={{ comment }} key={comment._id} />
+        <Comment props={{ comment, deleteComment }} key={comment._id} />
       ))}
       <CommentForm props={{ submitComment }} />
     </div>
@@ -60,9 +75,19 @@ const CommentForm = ({ props: { submitComment } }) => {
     </form>
   );
 };
-const Comment = ({ props: { comment } }) => {
+const Comment = ({ props: { comment, deleteComment } }) => {
+  const [session, loading] = useSession();
+
   return (
     <div className={styles.comment}>
+      {session && session.sub === comment.author._id && (
+        <button
+          onClick={() => deleteComment(comment._id)}
+          className={styles.deleteBtn}
+        >
+          X
+        </button>
+      )}
       <p>{comment.content}</p>
       <p>{comment.author.name}</p>
       <time className='date'>
