@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../styles/Post.module.css';
 import { useSession } from 'next-auth/client';
+
 const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);
@@ -26,7 +27,7 @@ const Post = () => {
   const deleteComment = (id) => {
     axios
       .delete(`/api/comment/${id}`)
-      .then(({ data }) => console.log(data))
+      .then(({ data }) => setPost(data))
       .catch((err) => console.log(err));
   };
   return (

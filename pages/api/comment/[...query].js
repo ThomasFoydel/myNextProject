@@ -12,8 +12,6 @@ const commentHandler = async (req, res) => {
   const foundUser = await User.findById(session.sub);
   if (!foundUser) return respond(400, { error: 'User not found' });
 
-  //   if (req.method !== 'POST')
-  //     return respond(400, { error: 'Method not supported' });
   if (req.method === 'POST') {
     if (!req.query || !req.query.postId)
       return respond(422, { error: 'Missing query' });
@@ -60,11 +58,36 @@ const commentHandler = async (req, res) => {
         error: 'Database is temporarily down, please try again later',
       });
     }
-  }
+  } else if (req.method === 'DELETE') {
+    const commentId = req.query.query[0];
+    if (!commentId) return respond(422, { error: 'Missing comment id' });
+    const isValid = mongoose.Types.ObjectId.isValid(commentId);
+    if (!isValid) return respond(422, { error: 'Invalid comment id' });
+    const commentIdObj = mongoose.Types.ObjectId(commentId);
+    const foundComment = await Comment.findById(commentIdObj);
+    if (!foundComment) return respond(400, { error: 'No comment found' });
 
-  if (req.method === 'DELETE') {
-    console.log('deleto!');
-    res.send('delet');
+    const updatedPost = await Post.findByIdAndUpdate(
+      foundComment.post._id,
+      { $pull: { comments: commentIdObj } },
+      { new: true }
+    ).populate([
+      {
+        path: 'comments',
+        model: 'Comment',
+        populate: {
+          path: 'author',
+          model: 'User',
+        },
+      },
+      { path: 'author' },
+    ]);
+    Comment.deleteOne({ _id: commentIdObj }).then(() =>
+      respond(200, updatedPost)
+    );
+    return respond(200, updatedPost);
+  } else {
+    return respond(400, { error: 'Method not supported' });
   }
 };
 
