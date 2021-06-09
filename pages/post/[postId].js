@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../styles/Post.module.css';
 import { useSession } from 'next-auth/client';
+import Link from 'next/link';
 
 const Post = () => {
   const router = useRouter();
@@ -44,7 +45,9 @@ const PostDisplay = ({ props: { post, submitComment, deleteComment } }) => {
   return (
     <div className='blogpost'>
       <h3>{post.title}</h3>
-      <p>{post.author.name}</p>
+      <Link href={`/profile/${post.author._id}`}>
+        <p>{post.author.name}</p>
+      </Link>
       <time className='date'>
         <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
         <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
