@@ -8,6 +8,7 @@ import Link from 'next/link';
 const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);
+  const [session] = useSession();
 
   useEffect(() => {
     let subscribed = true;
@@ -25,26 +26,44 @@ const Post = () => {
       .then(({ data }) => setPost(data))
       .catch((err) => console.log(err));
   };
-  const deleteComment = (id) => {
+  const deleteComment = (id) =>
+    id &&
     axios
       .delete(`/api/comment/${id}`)
       .then(({ data }) => setPost(data))
       .catch((err) => console.log(err));
-  };
+
+  const deletePost = () =>
+    post._id &&
+    axios
+      .delete(`/api/post/${post._id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   return (
     post && (
       <PostDisplay
-        props={{ post, submitComment, deleteComment }}
+        props={{ post, submitComment, deletePost, deleteComment, session }}
         key={post._id}
       />
     )
   );
 };
 
-const PostDisplay = ({ props: { post, submitComment, deleteComment } }) => {
+const PostDisplay = ({
+  props: { post, submitComment, deletePost, deleteComment, session },
+}) => {
   return (
     <div className='blogpost'>
       <h3>{post.title}</h3>
+
+      {session?.sub === post.author._id && (
+        <button
+          onClick={() => deletePost(post._id)}
+          className={styles.deleteBtn}
+        >
+          X
+        </button>
+      )}
       <Link href={`/profile/${post.author._id}`}>
         <p>{post.author.name}</p>
       </Link>
@@ -54,7 +73,10 @@ const PostDisplay = ({ props: { post, submitComment, deleteComment } }) => {
       </time>
       <p className='content'>{post.content}</p>
       {post.comments.map((comment) => (
-        <Comment props={{ comment, deleteComment }} key={comment._id} />
+        <Comment
+          props={{ comment, deleteComment, session }}
+          key={comment._id}
+        />
       ))}
       <CommentForm props={{ submitComment }} />
     </div>
@@ -79,9 +101,7 @@ const CommentForm = ({ props: { submitComment } }) => {
     </form>
   );
 };
-const Comment = ({ props: { comment, deleteComment } }) => {
-  const [session, loading] = useSession();
-
+const Comment = ({ props: { comment, deleteComment, session } }) => {
   return (
     <div className={styles.comment}>
       {session && session.sub === comment.author._id && (
