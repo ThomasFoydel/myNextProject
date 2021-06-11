@@ -37,7 +37,7 @@ const Post = () => {
     post._id &&
     axios
       .delete(`/api/post/${post._id}`)
-      .then((res) => console.log(res))
+      .then(() => router.push(`/profile/${post.author?._id}`))
       .catch((err) => console.log(err));
   return (
     post && (
