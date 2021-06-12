@@ -65,7 +65,7 @@ const PostDisplay = ({
         </button>
       )}
       <Link href={`/profile/${post.author._id}`}>
-        <p>{post.author.name}</p>
+        <p className='author'>{post.author.name}</p>
       </Link>
       <time className='date'>
         <span>{new Date(post.createdAt).toLocaleDateString()}, </span>

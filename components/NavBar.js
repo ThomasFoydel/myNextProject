@@ -28,13 +28,13 @@ const NavBar = () => {
               <a>New Post</a>
             </Link>
             <button className={styles.btn} onClick={signOut}>
-              logout
+              Logout
             </button>
           </>
         )}
         {loggedOut && (
           <button className={styles.btn} onClick={handleOpenAuth}>
-            login
+            Login
           </button>
         )}
       </nav>

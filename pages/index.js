@@ -9,7 +9,7 @@ import Link from 'next/link';
 const BlogPost = ({ props: { post } }) => (
   <div className='blogpost'>
     <Link href={`/post/${post._id}`}>
-      <h3>{post.title}</h3>
+      <h3 className='title'>{post.title}</h3>
     </Link>
     <p className='date'>
       <span>{new Date(post.createdAt).toLocaleDateString()}, </span>

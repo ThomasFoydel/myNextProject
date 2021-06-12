@@ -65,11 +65,22 @@ footer {
   font-size: 1rem;
 }
 
+.blogpost .title,
+.blogpost .author {
+  cursor: pointer;
+}
+.blogpost .title:hover,
+.blogpost .author:hover {
+  opacity: 0.9;
+}
+
 .blogpost .content {
   font-size: 1.4rem;
   max-height: 400px;
   overflow: auto;
   padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
 }
 
 .blogpost .btn {
