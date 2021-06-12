@@ -24,6 +24,9 @@ const NavBar = () => {
             <Link href={`/profile/${session.sub}`}>
               <a>Profile</a>
             </Link>
+            <Link href={'/newpost'}>
+              <a>New Post</a>
+            </Link>
             <button className={styles.btn} onClick={signOut}>
               logout
             </button>

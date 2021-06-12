@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getSession } from 'next-auth/client';
+import { useSession, getSession } from 'next-auth/client';
 import axios from 'axios';
 import styles from '../styles/NewPost.module.css';
 
@@ -7,18 +7,21 @@ const NewPost = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [session] = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
       .post('/api/post/new', { title, content })
-      .then((result) => console.log(result))
+      .then(
+        () => session?.sub && (window.location.href = `/profile/${session.sub}`)
+      )
       .catch((err) => console.log({ err }));
   };
   useEffect(() => {
-    getSession().then((session) => {
+    getSession().then((foundSession) => {
       setIsLoading(false);
-      if (!session) window.location.href = '/';
+      if (!foundSession) window.location.href = '/';
     });
   }, []);
 

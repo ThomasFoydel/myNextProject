@@ -90,12 +90,8 @@ export async function getStaticProps() {
           revalidate: 21600,
         };
       } catch (err) {
-        console.log(err);
         return { props: { posts: [] }, revalidate: 21600 };
       }
     })
-    .catch((err) => {
-      console.log(err);
-      return { props: { posts: [] }, revalidate: 21600 };
-    });
+    .catch((err) => ({ props: { posts: [] }, revalidate: 21600 }));
 }

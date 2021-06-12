@@ -2,10 +2,7 @@ import dbConnection from '../../../middlewares/db';
 import User from '../../../models/User';
 
 const register = async (req, res) => {
-  const respond = (s, d) => {
-    console.log(s);
-    res.status(s).send(d);
-  };
+  const respond = (s, d) => res.status(s).send(d);
   if (req.method !== 'POST')
     return respond(400, { error: 'Method not supported' });
 
@@ -53,10 +50,7 @@ const register = async (req, res) => {
       const { password, ...filteredUser } = user._doc;
       return respond(200, filteredUser);
     })
-    .catch((err) => {
-      console.log(err);
-      return respond(500), { error: 'Database is down' };
-    });
+    .catch(() => respond(500), { error: 'Database is down' });
 };
 
 export default dbConnection(register);

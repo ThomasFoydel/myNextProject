@@ -6,10 +6,7 @@ import Comment from '../../../models/Comment'; // do not remove
 import { getSession } from 'next-auth/client';
 
 async function handler(req, res) {
-  const respond = (s, d) => {
-    console.log(d);
-    return res.status(s).send(d);
-  };
+  const respond = (s, d) => res.status(s).send(d);
   const { postId } = req.query;
   const { method } = req;
 
