@@ -5,6 +5,7 @@ import User from '../../../models/User';
 
 async function handler(req, res) {
   const { method } = req;
+
   if (method === 'POST') {
     const session = await getSession({ req });
     if (!session) return res.status(401).send();
@@ -12,13 +13,15 @@ async function handler(req, res) {
     if (!foundUser) return res.status(422).send();
 
     const { _id } = foundUser;
-    const { title, content } = req.body;
+    const { title, content, imageUrl } = req.body;
     if (!(title && content)) return res.status(422).send();
     const newPost = await Post.create({
       author: _id,
       title,
       content,
+      imageUrl,
     });
+
     return res.send(newPost);
   } else {
     return res.status(400).send();

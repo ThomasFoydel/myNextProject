@@ -8,7 +8,6 @@ export default function EditProfile() {
     e.preventDefault();
     let data = { ...form };
     for (const key in data) data[key].trim().length === 0 && delete data[key];
-    console.log('data: ', data);
     axios
       .post('/api/editprofile', data)
       .then((res) => {

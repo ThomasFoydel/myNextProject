@@ -7,12 +7,13 @@ const NewPost = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [session] = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post('/api/post/new', { title, content })
+      .post('/api/post/new', { title, content, imageUrl })
       .then(
         () => session?.sub && (window.location.href = `/profile/${session.sub}`)
       )
@@ -46,6 +47,14 @@ const NewPost = () => {
           value={content}
           style={{ resize: 'none' }}
           onChange={({ target: { value } }) => setContent(value)}
+        />
+        <label htmlFor='imageUrl'>Image URL</label>
+        <input
+          id='imageUrl'
+          placeholder='image url'
+          value={imageUrl}
+          type='text'
+          onChange={({ target: { value } }) => setImageUrl(value)}
         />
         <button type='submit'>submit</button>
       </form>
