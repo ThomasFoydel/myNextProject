@@ -14,6 +14,7 @@ async function handler(req, res) {
 
     const { _id } = foundUser;
     const { title, content, imageUrl } = req.body;
+
     if (!(title && content)) return res.status(422).send();
     const newPost = await Post.create({
       author: _id,

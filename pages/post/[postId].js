@@ -48,40 +48,34 @@ const Post = () => {
     )
   );
 };
-
 const PostDisplay = ({
   props: { post, submitComment, deletePost, deleteComment, session },
-}) => {
-  return (
-    <div className='blogpost'>
-      <h3>{post.title}</h3>
+}) => (
+  <div className='blogpost'>
+    <h3>{post.title}</h3>
 
-      {session?.sub === post.author._id && (
-        <button
-          onClick={() => deletePost(post._id)}
-          className={styles.deleteBtn}
-        >
-          X
-        </button>
-      )}
-      <Link href={`/profile/${post.author._id}`}>
-        <p className='author'>{post.author.name}</p>
-      </Link>
-      <time className='date'>
-        <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
-        <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
-      </time>
-      <p className='content'>{post.content}</p>
-      {post.comments.map((comment) => (
-        <Comment
-          props={{ comment, deleteComment, session }}
-          key={comment._id}
-        />
-      ))}
-      <CommentForm props={{ submitComment }} />
-    </div>
-  );
-};
+    {session?.sub === post.author._id && (
+      <button onClick={() => deletePost(post._id)} className={styles.deleteBtn}>
+        X
+      </button>
+    )}
+    <Link href={`/profile/${post.author._id}`}>
+      <p className='author'>{post.author.name}</p>
+    </Link>
+    <time className='date'>
+      <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
+      <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+    </time>
+    {post.imageUrl && (
+      <img src={post.imageUrl} alt='post picture' className='img' />
+    )}
+    <p className='content'>{post.content}</p>
+    {post.comments.map((comment) => (
+      <Comment props={{ comment, deleteComment, session }} key={comment._id} />
+    ))}
+    <CommentForm props={{ submitComment }} />
+  </div>
+);
 
 const CommentForm = ({ props: { submitComment } }) => {
   const [content, setContent] = useState('');

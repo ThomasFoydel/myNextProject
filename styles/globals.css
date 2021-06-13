@@ -94,3 +94,7 @@ footer {
   opacity: 0.5;
   cursor: default;
 }
+
+.blogpost .img {
+  width: 100%;
+}

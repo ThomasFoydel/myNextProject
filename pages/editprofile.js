@@ -3,13 +3,13 @@ import axios from 'axios';
 import styles from '../styles/EditProfile.module.css';
 
 export default function EditProfile() {
-  const [form, setForm] = useState({ name: '', github: '' });
+  const [form, setForm] = useState({ name: '', github: '', profilePic: '' });
   const handleSubmit = (e) => {
     e.preventDefault();
     let data = { ...form };
     for (const key in data) data[key].trim().length === 0 && delete data[key];
     axios
-      .post('/api/editprofile', data)
+      .put('/api/profile/edit', data)
       .then((res) => {
         console.log(res);
       })
@@ -24,6 +24,7 @@ export default function EditProfile() {
         <h2>Edit Profile</h2>
         <label htmlFor='name'>Name</label>
         <input
+          placeholder='Name'
           type='text'
           onChange={handleChange}
           id='name'
@@ -31,10 +32,19 @@ export default function EditProfile() {
         />
         <label htmlFor='github'>GitHub</label>
         <input
+          placeholder='GitHub'
           type='text'
           onChange={handleChange}
           id='github'
           value={form.github}
+        />
+        <label htmlFor='profilePic'>Profile Picture URL</label>
+        <input
+          placeholder='Profile Picture URL'
+          type='text'
+          onChange={handleChange}
+          id='profilePic'
+          value={form.profilePic}
         />
         <button type='submit'>submit</button>
       </form>
