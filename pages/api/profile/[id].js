@@ -12,7 +12,9 @@ async function handler(req, res) {
     if (isValid) {
       const mId = mongoose.Types.ObjectId(id);
       const foundUser = await User.findById(mId);
-      const foundPosts = await Post.find({ author: mId }).limit(15);
+      const foundPosts = await Post.find({ author: mId })
+        .sort({ createdAt: 'desc' })
+        .limit(15);
       return res.send({ user: foundUser, posts: foundPosts });
     } else {
       return res.status(404).send();

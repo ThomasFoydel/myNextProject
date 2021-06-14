@@ -44,6 +44,13 @@ export default function Profile() {
   return (
     <div className={styles.profile}>
       <h2>{user.name}</h2>
+      {user.profilePic && (
+        <img
+          className={styles.profilePic}
+          src={user.profilePic}
+          alt={`${user.name}'s profile`}
+        />
+      )}
       {ownProfile && <Link href='/editprofile'>edit profile</Link>}
       {posts.map((post) => (
         <BlogPost props={{ post }} key={post._id} />

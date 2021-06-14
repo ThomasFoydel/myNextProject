@@ -4,3 +4,10 @@
   padding: 1rem;
   padding-bottom: 5rem;
 }
+
+.profilePic {
+  width: 50%;
+  margin-left: 50%;
+  transform: translate(-50%);
+  border-radius: 100%;
+}
