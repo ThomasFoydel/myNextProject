@@ -16,7 +16,7 @@ async function handler(req, res) {
       const foundUser = await User.findById(mId);
       if (!foundUser) return res.status(404).send();
       User.findByIdAndUpdate(session.sub, req.body, { new: true })
-        .then((updatedUser) => res.send(updatedUser))
+        .then((updatedUser) => res.send(updatedUser._id))
         .catch(() => res.status(500).send());
     } else {
       return res.status(404).send();

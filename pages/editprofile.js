@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/EditProfile.module.css';
+import { useRouter } from 'next/router';
 
 export default function EditProfile() {
   const [form, setForm] = useState({ name: '', github: '', profilePic: '' });
+  const router = useRouter();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let data = { ...form };
@@ -11,7 +14,7 @@ export default function EditProfile() {
     axios
       .put('/api/profile/edit', data)
       .then((res) => {
-        console.log(res);
+        router.push(`/profile/${res.data}`);
       })
       .catch((err) => console.log(err));
   };
