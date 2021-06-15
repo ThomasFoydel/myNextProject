@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from '../../styles/Post.module.css';
 import { useSession } from 'next-auth/client';
 import Link from 'next/link';
-
+import Image from '../../components/Image';
 const Post = () => {
   const router = useRouter();
   const [post, setPost] = useState(null);
@@ -67,7 +67,12 @@ const PostDisplay = ({
       <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
     </time>
     {post.imageUrl && (
-      <img src={post.imageUrl} alt='post picture' className='img' />
+      <Image
+        src={post.imageUrl}
+        alt='post picture'
+        className='img'
+        fallbackSrc={'/logo.png'}
+      />
     )}
     <p className='content'>{post.content}</p>
     {post.comments.map((comment) => (
