@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import axios from 'axios';
 import styles from '../styles/Blog.module.css';
 import Link from 'next/link';
+import { useTransition, animated, config } from 'react-spring';
 
 const BlogPost = ({ props: { post } }) => (
   <div className='blogpost'>
@@ -35,17 +36,27 @@ export default function Home({ posts }) {
           setBlogPosts(data);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
+
+  const animation = useTransition(posts, (item) => item._id, {
+    from: { opacity: '0', transform: 'translateY(-100px)' },
+    enter: { opacity: '1', transform: 'translateY(0px)' },
+    trail: 520,
+    config: config.wobbly,
+  });
 
   return (
     <div className={styles.blog}>
       <h2>Blog</h2>
-      {blogPosts.map((post) => {
-        return <BlogPost props={{ post }} key={post._id} />;
+      {animation.map(({ item, props, key }) => {
+        return (
+          <animated.div style={props} key={key}>
+            <BlogPost props={{ post: item }} />
+          </animated.div>
+        );
       })}
+
       <button
         className={`${styles.btn} ${offset <= 0 && styles.btnInactive}`}
         onClick={() => offset > 0 && fetchPosts(-1)}
