@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styles from '../../styles/Profile.module.css';
 import Link from 'next/link';
+import { animated, useSpring, config } from 'react-spring';
 
 const BlogPost = ({ props: { post } }) => (
   <div className='blogpost'>
@@ -40,18 +41,24 @@ export default function Profile() {
       setOwnProfile(true);
     }
   }, [router.query.id, session]);
-
+  const animation = useSpring({
+    from: { opacity: 0, transform: 'translateY(-100px)' },
+    to: { opacity: 1, transform: 'translateY(0px)' },
+    config: config.molasses,
+  });
   return (
     <div className={styles.profile}>
-      <h2>{user.name}</h2>
-      {user.profilePic && (
-        <img
-          className={styles.profilePic}
-          src={user.profilePic}
-          alt={`${user.name}'s profile`}
-        />
-      )}
-      {ownProfile && <Link href='/editprofile'>edit profile</Link>}
+      <animated.div style={animation}>
+        <h2>{user.name}</h2>
+        {user.profilePic && (
+          <img
+            className={styles.profilePic}
+            src={user.profilePic}
+            alt={`${user.name}'s profile`}
+          />
+        )}
+        {ownProfile && <Link href='/editprofile'>edit profile</Link>}
+      </animated.div>
       {posts.map((post) => (
         <BlogPost props={{ post }} key={post._id} />
       ))}
