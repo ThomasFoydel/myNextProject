@@ -51,11 +51,14 @@ export default function Profile() {
       <animated.div style={animation}>
         <h2>{user.name}</h2>
         {user.profilePic && (
-          <img
-            className={styles.profilePic}
-            src={user.profilePic}
-            alt={`${user.name}'s profile`}
-          />
+          <div className={styles.imgContainer}>
+            <img
+              className={styles.profilePic}
+              src={user.profilePic}
+              alt={`${user.name}'s profile`}
+            />
+            <div className={styles.shade} />
+          </div>
         )}
         {ownProfile && <Link href='/editprofile'>edit profile</Link>}
       </animated.div>
