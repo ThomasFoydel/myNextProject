@@ -24,3 +24,14 @@
   justify-content: center;
   align-items: center;
 }
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+.links a {
+  font-size: 1.4rem;
+}
+.links a:hover {
+  color: rgb(203, 88, 88);
+}

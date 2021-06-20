@@ -60,7 +60,18 @@ export default function Profile() {
             <div className={styles.shade} />
           </div>
         )}
-        {ownProfile && <Link href='/editprofile'>edit profile</Link>}
+        <div className={styles.links}>
+          {user.github && (
+            <a href={`https://github.com/${user.github}`} target='_blank'>
+              github
+            </a>
+          )}
+          {ownProfile && (
+            <Link href='/editprofile'>
+              <a>edit profile</a>
+            </Link>
+          )}
+        </div>
       </animated.div>
       {posts.map((post) => (
         <BlogPost props={{ post }} key={post._id} />
