@@ -2,13 +2,14 @@ import styles from '../styles/NavBar.module.css';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/client';
 import authContext from '../store/authContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 const NavBar = () => {
   const authCtx = useContext(authContext);
   const [session, loading] = useSession();
   const loggedIn = !loading && session;
   const loggedOut = !loading && !session;
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleOpenAuth = () => authCtx.setAuthOpen(true);
 
@@ -37,6 +38,15 @@ const NavBar = () => {
             Login
           </button>
         )}
+      </nav>
+      <nav className={styles.navbarSmall}>
+        <img className={styles.logo} src='/logo.png' alt='logo' />
+        <img
+          onClick={() => setDrawerOpen(true)}
+          className={styles.hamburger}
+          src='/images/hamburger.png'
+          alt='open menu'
+        />
       </nav>
       <div className={styles.navSpace} />
     </>

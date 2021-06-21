@@ -11,6 +11,35 @@
   top: 0;
   z-index: 10;
 }
+
+.navbarSmall {
+  width: 100vw;
+  top: 0;
+  z-index: 10;
+  background: black;
+  color: white;
+  padding: 0.4rem;
+  position: fixed;
+  height: 6em;
+  display: none;
+  justify-content: center;
+}
+
+.hamburger {
+  position: absolute;
+  right: 0.5em;
+  top: 0.8rem;
+}
+
+@media screen and (max-width: 540px) {
+  .navbar {
+    display: none;
+  }
+  .navbarSmall {
+    display: flex;
+  }
+}
+
 .navSpace {
   height: 6em;
 }
