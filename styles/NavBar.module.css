@@ -31,13 +31,34 @@
   top: 0.8rem;
 }
 
-@media screen and (max-width: 540px) {
-  .navbar {
-    display: none;
-  }
-  .navbarSmall {
-    display: flex;
-  }
+.hamburgerBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.drawer {
+  background: black;
+  color: white;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 2rem;
+}
+.drawer a,
+.drawer .btn {
+  margin: 5px;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.drawer a:hover,
+.drawer .btn:hover {
+  color: rgb(203, 88, 88);
+}
+.drawer .btn {
+  text-align: left;
+  font-size: 2rem;
 }
 
 .navSpace {
@@ -69,4 +90,16 @@
 
 .btn:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 540px) {
+  .navbar {
+    display: none;
+  }
+  .navbarSmall {
+    display: flex;
+  }
+  .drawer {
+    display: flex;
+  }
 }
