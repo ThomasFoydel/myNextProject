@@ -71,7 +71,7 @@ footer {
 }
 .blogpost .title:hover,
 .blogpost .author:hover {
-  opacity: 0.9;
+  color: rgb(203, 88, 88);
 }
 
 .blogpost .content {

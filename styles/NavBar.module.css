@@ -76,7 +76,7 @@
 }
 
 .navbar a:hover {
-  text-decoration: underline;
+  color: rgb(203, 88, 88);
 }
 
 .btn {
@@ -89,7 +89,7 @@
 }
 
 .btn:hover {
-  text-decoration: underline;
+  color: rgb(203, 88, 88);
 }
 
 @media screen and (max-width: 540px) {
