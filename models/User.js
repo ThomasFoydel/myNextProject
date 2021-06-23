@@ -17,6 +17,7 @@ const userSchema = mongoose.Schema({
   },
   github: { type: String },
   profilePic: { type: String },
+  following: { type: [mongoose.Types.ObjectId], ref: 'User' },
 });
 
 userSchema.pre('save', async function save(next) {
