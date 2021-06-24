@@ -2,7 +2,7 @@ import dbConnection from '../../../middlewares/db';
 import { getSession } from 'next-auth/client';
 import User from '../../../models/User';
 
-const handler = (req, res) => {
+const handler = async (req, res) => {
   const session = await getSession({ req });
 
   const { id } = req.query;

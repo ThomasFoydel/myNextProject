@@ -41,11 +41,20 @@ export default function Profile() {
       setOwnProfile(true);
     }
   }, [router.query.id, session]);
+
+  const handleFollow = () =>
+    user._id &&
+    axios
+      .post(`/api/follow/${user._id}`)
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.log(err));
+
   const animation = useSpring({
     from: { opacity: 0, transform: 'translateY(-100px)' },
     to: { opacity: 1, transform: 'translateY(0px)' },
     config: config.molasses,
   });
+
   return (
     <div className={styles.profile}>
       <animated.div style={animation}>
@@ -71,6 +80,7 @@ export default function Profile() {
               <a>edit profile</a>
             </Link>
           )}
+          <button onClick={handleFollow}>follow</button>
         </div>
       </animated.div>
       {posts.map((post) => (
