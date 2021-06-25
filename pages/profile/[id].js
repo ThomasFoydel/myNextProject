@@ -23,6 +23,7 @@ export default function Profile() {
   const [posts, setPosts] = useState([]);
   const [session] = useSession();
   const [user, setUser] = useState({});
+  const [following, setFollowing] = useState(false);
   const [ownProfile, setOwnProfile] = useState(false);
   const router = useRouter();
 
@@ -30,8 +31,9 @@ export default function Profile() {
     if (router.query.id) {
       axios
         .get(`/api/profile/${router.query.id}`)
-        .then(({ data: { user, posts } }) => {
+        .then(({ data: { user, posts, following } }) => {
           setUser(user);
+          setFollowing(following);
           setPosts(posts);
         })
         .catch((err) => console.log(err));
@@ -80,7 +82,7 @@ export default function Profile() {
               <a>edit profile</a>
             </Link>
           )}
-          <button onClick={handleFollow}>follow</button>
+          {!following && <button onClick={handleFollow}>follow</button>}
         </div>
       </animated.div>
       {posts.map((post) => (
