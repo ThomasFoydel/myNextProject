@@ -12,8 +12,11 @@ const NavBar = () => {
   const loggedOut = !loading && !session;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleOpenAuth = () => authCtx.setAuthOpen(true);
   const close = () => setDrawerOpen(false);
+  const handleOpenAuth = () => {
+    authCtx.setAuthOpen(true);
+    close();
+  };
 
   const links = (
     <>

@@ -5,6 +5,7 @@ import Register from './Register';
 import Login from './Login';
 import { signIn } from 'next-auth/client';
 import authContext from '../../store/authContext';
+import { useSpring, animated, config } from 'react-spring';
 
 const Auth = () => {
   const authCtx = useContext(authContext);
@@ -41,11 +42,16 @@ const Auth = () => {
     authCtx.setAuthOpen(false);
   };
 
+  const animation = useSpring({
+    opacity: authCtx.authOpen ? 1 : 0,
+    transform: authCtx.authOpen
+      ? 'translateY(0%) translateX(-50%)'
+      : 'translateY(-100%) translateX(-50%)',
+    config: config.smooth,
+  });
+
   return (
-    <div
-      className={styles.auth}
-      style={{ display: authCtx.authOpen ? 'inherit' : 'none' }}
-    >
+    <animated.div className={styles.auth} style={animation}>
       <button className={styles.close} onClick={closeAuth}>
         X
       </button>
@@ -64,7 +70,7 @@ const Auth = () => {
           props={{ setForm, data: form.login, styles, handleSubmit, setShow }}
         />
       )}
-    </div>
+    </animated.div>
   );
 };
 
