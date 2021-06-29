@@ -8,6 +8,8 @@
 .profilePic {
   width: 50%;
   border-radius: 100%;
+  min-width: 50%;
+  min-height: 50%;
 }
 
 .shade {

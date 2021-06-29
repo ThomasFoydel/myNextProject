@@ -51,16 +51,18 @@ export default function Profile() {
       .then(({ data }) => console.log(data))
       .catch((err) => console.log(err));
 
-  const transition1 = useTransition([user, ...posts], (item) => item._id, {
+  const transition = useTransition([user, ...posts], (item) => item._id, {
     from: { opacity: '0', transform: 'translateY(-100px)' },
     enter: { opacity: '1', transform: 'translateY(0px)' },
+    trail: 720,
     config: config.smooth,
   });
 
   return (
     <div className={styles.profile}>
-      {transition1.map(({ item, props, key }, i) => {
-        if (i === 0) {
+      {transition.map(({ item, props, key }) => {
+        if (JSON.stringify({}) === JSON.stringify(item)) return
+        else if (item.name) {
           return (
             <animated.div style={props} key={key}>
               <h2>{user.name}</h2>
