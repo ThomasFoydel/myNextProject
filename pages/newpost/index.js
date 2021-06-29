@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSession, getSession } from 'next-auth/client';
 import axios from 'axios';
-import styles from '../styles/NewPost.module.css';
+import styles from '../../styles/NewPost.module.css';
+import { useSpring, animated, config } from 'react-spring';
 
 const NewPost = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,10 +27,16 @@ const NewPost = () => {
     });
   }, []);
 
+  const animation = useSpring({
+    from: { opacity: 0, transform: 'translateY(-100%) translateX(-50%)' },
+    to: { opacity: 1, transform: 'translateY(0%) translateX(-50%)' },
+    config: config.smooth
+  })
+
   if (isLoading) return <p>loading!</p>;
 
   return (
-    <div className={styles.newPost}>
+    <animated.div style={animation} className={styles.newPost}>
       <h2>new post</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor='title'>Title</label>
@@ -58,7 +65,7 @@ const NewPost = () => {
         />
         <button type='submit'>submit</button>
       </form>
-    </div>
+    </animated.div>
   );
 };
 
