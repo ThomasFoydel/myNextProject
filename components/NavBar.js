@@ -77,7 +77,6 @@ const NavBar = () => {
 const Drawer = ({ props: { open, links, close } }) => {
   const animation = useSpring({
     transform: open ? 'translateY(0px)' : 'translateY(-100%)',
-    opacity: open ? 1 : 0.5,
     config: config.smooth,
   });
 
