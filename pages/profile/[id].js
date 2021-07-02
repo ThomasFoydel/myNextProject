@@ -48,9 +48,14 @@ export default function Profile() {
     user._id &&
     axios
       .post(`/api/follow/${user._id}`)
-      .then(({ data }) => console.log(data))
+      .then(() => setFollowing(true))
       .catch((err) => console.log(err));
 
+  const handleUnfollow = () => user._id &&   axios
+      .post(`/api/unfollow/${user._id}`)
+      .then(() => setFollowing(false))
+      .catch((err) => console.log(err));
+      
   const transition = useTransition([user, ...posts], (item) => item._id, {
     from: { opacity: '0', transform: 'translateY(-100px)' },
     enter: { opacity: '1', transform: 'translateY(0px)' },
@@ -87,6 +92,7 @@ export default function Profile() {
                     <a>edit profile</a>
                   </Link>
                 )}
+                 {following && <button onClick={handleUnfollow}>unfollow</button>}
                 {!following && <button onClick={handleFollow}>follow</button>}
               </div>
             </animated.div>
