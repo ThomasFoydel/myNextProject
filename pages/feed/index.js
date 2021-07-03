@@ -9,6 +9,7 @@ const BlogPost = ({ props: { post } }) => (
     <Link href={`/post/${post._id}`}>
       <h3 className='title'>{post.title}</h3>
     </Link>
+    <p>{post.author.name}</p>
     <p className='date'>
       <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
       <span>{new Date(post.createdAt).toLocaleTimeString()}</span>

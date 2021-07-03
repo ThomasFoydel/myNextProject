@@ -12,14 +12,33 @@ const feedHandler = async (req, res) => {
   };
   if (req.method !== 'GET')
     return respond(400, { error: 'Method not supported' });
-  const foundUser = await User.findById(session.sub);
+
+
+  const { sub } = session;
+  const isValid = mongoose.Types.ObjectId.isValid(sub);
+  if (!isValid) return respond(422, { error: 'Invalid user id' });
+  const subIdObj = mongoose.Types.ObjectId(sub);
+
+  const foundUser = await User.findById(subIdObj);
   if (!foundUser) return respond(400, { error: 'User not found' });
 
-  const posts = await Post.find({'_id': { $in: [foundUser.following]}})
+  const posts = await Post.find({'author': { $in: foundUser.following}})
+    .populate([
+        {
+          path: 'comments',
+          model: 'Comment',
+          populate: {
+            path: 'author',
+            model: 'User',
+          },
+        },
+        { path: 'author' },
+      ])
     .sort({ createdAt: 'desc' })
     .limit(15)
     .skip(req.body.skip * 15 || 0);
-  return res.send(posts);
+
+  res.send(posts)
 };
 
 export default dbConnection(feedHandler);
