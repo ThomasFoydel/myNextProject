@@ -14,7 +14,7 @@ const handler = async (req, res) => {
   if (method === 'PUT') {
     return User.findByIdAndUpdate(
       foundUser._id,
-      { $push: { following: [id] } },
+      { $pull: { following: id } },
       { new: true }
     )
       .then((updatedUser) => res.send(updatedUser))

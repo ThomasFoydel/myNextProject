@@ -47,15 +47,15 @@ export default function Profile() {
   const handleFollow = () =>
     user._id &&
     axios
-      .post(`/api/follow/${user._id}`)
+      .put(`/api/follow/${user._id}`)
       .then(() => setFollowing(true))
       .catch((err) => console.log(err));
 
   const handleUnfollow = () => user._id &&   axios
-      .post(`/api/unfollow/${user._id}`)
+      .put(`/api/unfollow/${user._id}`)
       .then(() => setFollowing(false))
       .catch((err) => console.log(err));
-      
+
   const transition = useTransition([user, ...posts], (item) => item._id, {
     from: { opacity: '0', transform: 'translateY(-100px)' },
     enter: { opacity: '1', transform: 'translateY(0px)' },
