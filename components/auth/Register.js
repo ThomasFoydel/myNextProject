@@ -6,7 +6,7 @@ const Register = ({
     setForm((f) => ({ ...f, register: { ...f.register, [id]: value } }));
   return (
     <>
-      <h3>Register</h3>
+      <h3 className={styles.title}>Register</h3>
       <form id='register' className={styles.authform} onSubmit={handleSubmit}>
         <label htmlFor='name'>Name: </label>
         <input

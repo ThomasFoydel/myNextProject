@@ -4,7 +4,7 @@ const Login = ({ props: { setForm, data, styles, handleSubmit, setShow } }) => {
     setForm((f) => ({ ...f, login: { ...f.login, [id]: value } }));
   return (
     <>
-      <h3>Login</h3>
+      <h3 className={styles.title}>Login</h3>
       <form id='login' className={styles.authform} onSubmit={handleSubmit}>
         <label htmlFor='email'>Email: </label>
         <input

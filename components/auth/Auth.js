@@ -53,7 +53,7 @@ const Auth = () => {
   return (
     <animated.div className={styles.auth} style={animation}>
       <button className={styles.close} onClick={closeAuth}>
-        X
+        close
       </button>
       {show === 'register' ? (
         <Register
