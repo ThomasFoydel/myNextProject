@@ -70,7 +70,7 @@ export default function Profile() {
         else if (item.name) {
           return (
             <animated.div style={props} key={key}>
-              <h2>{user.name}</h2>
+              <h2 className={styles.username}>{user.name}</h2>
               {user.profilePic && (
                 <div className={styles.imgContainer}>
                   <img
@@ -92,8 +92,8 @@ export default function Profile() {
                     <a>edit profile</a>
                   </Link>
                 )}
-                 {following && <button onClick={handleUnfollow}>unfollow</button>}
-                {!following && <button onClick={handleFollow}>follow</button>}
+                 {following && <button className={styles.followBtn} onClick={handleUnfollow}>unfollow</button>}
+                {!following && <button className={styles.followBtn} onClick={handleFollow}>follow</button>}
               </div>
             </animated.div>
           );

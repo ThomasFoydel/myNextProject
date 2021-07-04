@@ -39,3 +39,16 @@
 .links a:hover {
   color: rgb(203, 88, 88);
 }
+
+.followBtn {
+  width: 250px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  padding: .2rem;
+  font-size: 1rem;
+}
+
+.username{
+  font-size: 3rem;
+}
