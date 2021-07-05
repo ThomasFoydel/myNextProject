@@ -1,11 +1,7 @@
-import { useState } from 'react';
-import Post from '../models/Post';
-import User from '../models/User';
-import mongoose from 'mongoose';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from '../styles/Blog.module.css';
-import Link from 'next/link';
 import { useTransition, animated, config } from 'react-spring';
+import styles from '../../styles/AllPosts.module.css';
 
 const BlogPost = ({ props: { post } }) => (
   <div className='blogpost'>
@@ -20,25 +16,29 @@ const BlogPost = ({ props: { post } }) => (
   </div>
 );
 
-export default function Home({ posts }) {
-  const [blogPosts, setBlogPosts] = useState(posts);
+const index = () => {
+  const [posts, setPosts] = useState([]);
   const [offset, setOffset] = useState(0);
   const [showNextBtn, setShowNextBtn] = useState(true);
 
   const fetchPosts = (inc) => {
     setOffset((o) => o + inc);
     axios
-      .get('/api/blog', { skip: offset + inc })
+      .get('/api/allposts', { skip: offset + inc })
       .then(({ data }) => {
         if (inc === -1) setShowNextBtn(true);
-        if (inc === 1 && data[0]._id === blogPosts[0]._id) {
+        if (inc === 1 && data[0]._id === posts[0]._id) {
           setShowNextBtn(false);
         } else {
-          setBlogPosts(data);
+          setPosts(data);
         }
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    fetchPosts(0);
+  }, []);
 
   const animation = useTransition(posts, (item) => item._id, {
     from: { opacity: '0', transform: 'translateY(-100px)' },
@@ -48,8 +48,8 @@ export default function Home({ posts }) {
   });
 
   return (
-    <div className={styles.blog}>
-      <h2>Blog</h2>
+    <div className={styles.allposts}>
+      <h2>All Posts</h2>
       {animation.map(({ item, props, key }) => {
         return (
           <animated.div style={props} key={key}>
@@ -72,38 +72,6 @@ export default function Home({ posts }) {
       </button>
     </div>
   );
-}
+};
 
-export async function getStaticProps() {
-  return mongoose
-    .connect(process.env.mongodburl)
-    .then(async () => {
-      try {
-        const thomas = await User.findOne({ email: 'thomasjfoydel@gmail.com' });
-
-        const posts = await Post.find({ author: thomas._id })
-          .select('-comments')
-          .lean()
-          .sort({ createdAt: 'desc' })
-          .limit(15);
-
-        const stringIdPosts = posts.map(
-          ({ _id, author, createdAt, updatedAt, ...post }) => ({
-            ...post,
-            _id: _id.toString(),
-            author: author.toString(),
-            createdAt: createdAt.toString(),
-            updatedAt: updatedAt.toString(),
-          })
-        );
-
-        return {
-          props: { posts: stringIdPosts },
-          revalidate: 21600,
-        };
-      } catch (err) {
-        return { props: { posts: [] }, revalidate: 21600 };
-      }
-    })
-    .catch((err) => ({ props: { posts: [] }, revalidate: 21600 }));
-}
+export default index;
