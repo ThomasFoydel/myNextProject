@@ -9,6 +9,7 @@ const NewPost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [tags, setTags] = useState('');
   const [session] = useSession();
 
   const handleSubmit = async (e) => {
@@ -62,6 +63,13 @@ const NewPost = () => {
           value={imageUrl}
           type='text'
           onChange={({ target: { value } }) => setImageUrl(value)}
+        />
+        <input
+          id='tags'
+          placeholder='tags'
+          value={tags}
+          type='text'
+          onChange={({ target: { value } }) => setTags(value)}
         />
         <button type='submit'>submit</button>
       </form>

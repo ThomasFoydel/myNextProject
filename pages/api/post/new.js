@@ -13,7 +13,10 @@ async function handler(req, res) {
     if (!foundUser) return res.status(422).send();
 
     const { _id } = foundUser;
-    const { title, content, imageUrl } = req.body;
+    const { title, content, imageUrl, tags } = req.body;
+
+    const tagsArray = tags.split(' ');
+    
 
     if (!(title && content)) return res.status(422).send();
     const newPost = await Post.create({
@@ -21,6 +24,7 @@ async function handler(req, res) {
       title,
       content,
       imageUrl,
+      tags: tagsArray,
     });
 
     return res.send(newPost);
