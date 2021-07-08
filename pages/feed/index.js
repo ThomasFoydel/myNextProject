@@ -35,14 +35,13 @@ export default function Feed() {
     axios
       .get('/api/feed', { skip: offset + inc })
       .then(({ data }) => {
-          console.log("DATA: ", data)
         if (inc === -1) setShowNextBtn(true);
         if (inc === 1 && data[0]._id === blogPosts[0]._id) {
           setShowNextBtn(false);
         } else {
           setBlogPosts(data);
         }
-          setOffset((o) => o + inc);
+        setOffset((o) => o + inc);
       })
       .catch((err) => console.log(err));
   };
