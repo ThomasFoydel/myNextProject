@@ -15,7 +15,7 @@ const NewPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post('/api/post/new', { title, content, imageUrl })
+      .post('/api/post/new', { title, content, imageUrl, tags })
       .then(
         () => session?.sub && (window.location.href = `/profile/${session.sub}`)
       )

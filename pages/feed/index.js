@@ -4,19 +4,28 @@ import styles from '../../styles/Blog.module.css';
 import Link from 'next/link';
 import { useTransition, animated, config } from 'react-spring';
 
-const BlogPost = ({ props: { post } }) => (
-  <div className='blogpost'>
-    <Link href={`/post/${post._id}`}>
-      <h3 className='title'>{post.title}</h3>
-    </Link>
-    <p>{post.author.name}</p>
-    <p className='date'>
-      <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
-      <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
-    </p>
-    <p className='content'>{post.content}</p>
-  </div>
-);
+const BlogPost = ({ props: { post } }) => {
+  return (
+    <div className='blogpost'>
+      <Link href={`/post/${post._id}`}>
+        <h3 className='title'>{post.title}</h3>
+      </Link>
+      <p>{post.author.name}</p>
+      <p className='date'>
+        <span>{new Date(post.createdAt).toLocaleDateString()}, </span>
+        <span>{new Date(post.createdAt).toLocaleTimeString()}</span>
+      </p>
+      <p className='content'>{post.content}</p>
+      <div className={styles.tags}>
+        {post.tags.map((tag) => (
+          <p key={tag} className={styles.tag}>
+            #{tag}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function Feed() {
   const [blogPosts, setBlogPosts] = useState([]);

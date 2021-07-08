@@ -19,3 +19,14 @@
   opacity: 0.5;
   cursor: default;
 }
+
+.tags {
+  display: flex;
+  justify-content: center;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+}
+.tag {
+  margin: 0.2rem;
+}
